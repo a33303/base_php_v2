@@ -10,14 +10,14 @@ $answer = readline('Введите правильный ответ: ');
 
 if ($answer == 988) {
     echo 'Вы ответили верно!';
-} elseif ($answer == 810 && 740) {
+} elseif ($answer == 810 || $answer == 740) {
     echo 'Вы ответили не верно!';
 } else {
     echo "Напишите ответ из предложенных варинатов\n";
     $answer = readline('Введите правильный ответ: ');
     if ($answer == 988) {
         echo 'Вы ответили верно!';
-    } elseif ($answer == 810 || 740) {
+    } elseif ($answer == 810 || $answer == 740) {
         echo 'Вы ответили не верно!';
     }
 }

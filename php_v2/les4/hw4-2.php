@@ -3,7 +3,7 @@
 $array = [4, 5, 1, 4, 7, 8, 15, 6, 71, 5, 2];
 $number = [];
 
-function number($array, $number) : int {
+function number($array, $number) {
     foreach ($array as $item) {
         if ($item == max($array)){
             $number[] = $item; //самое большое число

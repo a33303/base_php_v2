@@ -6,16 +6,15 @@ include_once "model/User.php";
 session_start();
 
 $pageHeader = "Задачи";
-
 $username = null;
+$taskProvider = new TaskProvider();
+
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username']->getUsername();
 } else {
-    //Перенаправим на главную если пользователь не залогинен
     header("Location: /");
     die();
 }
-$taskProvider = new TaskProvider();
 
 if (isset($_GET['action']) && $_GET['action'] === 'add') {
     $taskText = strip_tags($_POST['task']);
@@ -32,10 +31,4 @@ if (isset($_GET['action']) && $_GET['action'] === 'done') {
 }
 
 $tasks = $taskProvider->getUndoneList();
-
-//$tasks = [
-//    'Погулять с собакой',
-//    'Починить компьютер'
-//];
-
 include "view/tasks.php";

@@ -1,7 +1,7 @@
 <?php
 
 include_once "exceptions/TaskAlreadyIsDoneException.php";
-require "/model/ITaskProvider";
+require "model/ITaskProvider.php";
 
 class TaskProvider implements ITaskProvider
 {
@@ -12,6 +12,10 @@ class TaskProvider implements ITaskProvider
         $this->pdo = $pdo;
     }
 
+    /**
+     * Метод возвращающий массив не выполненных задач из объекта
+     * @return array
+     */
     public function getUndoneList(int $userId): array
     {
         $statement = $this->pdo->prepare(
@@ -32,7 +36,7 @@ class TaskProvider implements ITaskProvider
 
         return $statement->execute([
             'user_id' => $userId,
-            'description' => $task->getDescription(),
+            'description' => $task->getDescription()
         ]);
     }
 
@@ -41,6 +45,7 @@ class TaskProvider implements ITaskProvider
      */
     public function deleteTask(int $key, int $user_id): bool
     {
+        //TODO кинуть исключение ошибки удаления
         $statement = $this->pdo->prepare(
             'DELETE FROM tasks WHERE id = :id AND user_id = :user_id'
         );
@@ -48,12 +53,9 @@ class TaskProvider implements ITaskProvider
             'user_id' => $user_id,
             'id' => $key
         ]);
-
         if ($statement->rowCount() == 0) {
             throw new TaskAlreadyIsDoneException("Такой задачи не существует");
         }
         return $res;
     }
-
-
 }

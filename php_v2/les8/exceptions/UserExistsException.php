@@ -4,3 +4,4 @@ class UserExistsException extends Exception
 {
 
 }
+

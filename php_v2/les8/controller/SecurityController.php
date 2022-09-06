@@ -19,6 +19,7 @@ if (isset($_POST['username'], $_POST['password'])) {
     ['username' => $username, 'password' => $password] = $_POST;
     $userProvider = new UserProvider($pdo);
     $user = $userProvider->getByUsernameAndPassword($username, $password);
+
     if ($user === null) {
         $error = 'Пользователь с указанными учетными данными не найден';
     } else {
